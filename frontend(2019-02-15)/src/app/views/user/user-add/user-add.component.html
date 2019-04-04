@@ -1,0 +1,164 @@
+<div class="breadcrumb">
+    <h1>User Add</h1>
+   
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+   
+
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Add (Register) User</div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" [(ngModel)]="addUserData.firstName" class="form-control form-control-rounded" id="firstName" placeholder="Enter your first name">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" [(ngModel)]="addUserData.lastName" class="form-control form-control-rounded" id="lastName" placeholder="Enter your last name">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="text" [(ngModel)]="addUserData.email" class="form-control form-control-rounded" id="password"
+                                aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="text" [(ngModel)]="addUserData.password"  class="form-control form-control-rounded" id="password"
+                                 placeholder="Enter Password">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="country">Country</label>
+                            <!-- <input type="text" [(ngModel)]="addUserData.country"  class="form-control form-control-rounded" id="country" placeholder="Enter Country"> -->
+                            <select class="form-control form-control-rounded" [(ngModel)]="addUserData.country">
+                                <option *ngFor="let country of countryArr" [value]="country.name">{{country.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">City</label>
+                            <input type="text" [(ngModel)]="addUserData.city" class="form-control form-control-rounded" id="city" placeholder="Enter City">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">CompanyName</label>
+                            <input type="text" [(ngModel)]="addUserData.companyName" class="form-control form-control-rounded" id="companyName" placeholder="Enter CompanyName">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="jobTitle">JobTitle</label>
+                            <input type="text" [(ngModel)]="addUserData.jobTitle" class="form-control form-control-rounded" id="jobTitle" placeholder="Enter JobTitle">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="facebook">FaceBook</label>
+                            <input type="text" [(ngModel)]="addUserData.facebook" class="form-control form-control-rounded" id="faceBook" placeholder="Enter Facebook URL">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="linkdin">Linkdin</label>
+                            <input type="text" [(ngModel)]="addUserData.linkdin" class="form-control form-control-rounded" id="Linkdin" placeholder="Enter Linkdin URL">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="phoneNumber">PhoneNumber</label>
+                            <input type="text" [(ngModel)]="addUserData.phoneNumber" class="form-control form-control-rounded" id="phoneNumber" placeholder="Enter PhoneNumber">
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="role">Role</label>
+                            <div style='display: flex' [formGroup]="radioGroup">
+                                <label class="radio radio-primary mr-3" >
+                                    <input type="radio" name="radio"  [value]="0" formControlName="radio" checked="checked">
+                                    <span>User</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio radio-success mr-3">
+                                    <input type="radio" name="radio" [value]="1" formControlName="radio">
+                                    <span>Admin</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="active">Active</label>
+                            <div style='display: flex' [formGroup]="radioGroup_active">
+                                <label class="radio radio-primary mr-3">
+                                    <input type="radio" name="radio_active" [value]="0" formControlName="radio_active" checked="checked">
+                                    <span>Active</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio radio-danger mr-3">
+                                    <input type="radio" name="radio_active" [value]="1" formControlName="radio_active">
+                                    <span>Deactive</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <label for="picture">Picture</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input"  accept="image/*" id="photo" aria-describedby="photo" (change) = "onFileSelected($event)">
+                                    <label class="custom-file-label" for="photo">{{chooseFileName}}</label>
+                                </div>
+
+                            </div>
+                            <label class="feedback-error" *ngIf="fileType">You must choose image files</label>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <label for="comments">Comments</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Comments</span>
+                                </div>
+                                <textarea class="form-control" aria-label="Comments" [(ngModel)]="addUserData.comments" ></textarea>
+                            </div>
+                        </div>
+
+                       
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="addUser()">
+                                <i class="i-Data-Save"></i>&nbsp; Save</button>
+                            <button type="button" class="btn btn-success btn-lg btn-rounded m-1" (click)="gotoList()">
+                                <i class="i-Left"></i>&nbsp; Cancel</button>
+                            <!-- <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading> -->
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #smallModal_view [class.show]="false" (click)="openSmall(modalSmall)">Launch Modal</button>
+                        <ng-template #modalSmall let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Save</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Saved Successfully.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                            </div>
+                        </ng-template>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>

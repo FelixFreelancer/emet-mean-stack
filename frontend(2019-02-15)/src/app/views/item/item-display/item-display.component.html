@@ -1,0 +1,204 @@
+<div class="breadcrumb">
+    <h1>Item Display</h1>
+   
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+
+
+    <div class="col-lg-6 col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-ecommerce-3 o-hidden mb-4">
+                    <div class="d-flex">
+                        <div class="item_picture">
+                            <img class="card-img-left" [src]="item.picture" alt="">
+                        </div>
+                        <div class="flex-grow-1 p-4">
+                            <h5 class="m-0">Item Featured</h5>
+                            <p class="m-0 text-small text-muted">Details</p>
+                            <p class="text-muted mt-3">{{item.details}}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-title m-0">Featured Item Stats</div>
+                        <p class="text-small text-muted">It is just showing featured items stats.</p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Administrator text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1">User Name</h4>
+                                        <span>{{user.firstName}} {{user.lastName}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-ID-2 text-32 mr-3" [ngClass]="{'text-i-Network': item.type==='Company', 'text-i-Business-Man': item.type==='Investor', 'text-i-Business-ManWoman': item.type==='Entrepreneur'}"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1 "
+                                         [ngClass]="{'text-i-Network': item.type==='Company', 'text-i-Business-Man': item.type==='Investor', 'text-i-Business-ManWoman': item.type==='Entrepreneur'}">Type</h4>
+                                        <span [ngClass]="{'text-i-Network': item.type==='Company', 'text-i-Business-Man': item.type==='Investor', 'text-i-Business-ManWoman': item.type==='Entrepreneur'}">{{item.type}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Friendster text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1">Interest</h4>
+                                        <span>{{item.interest}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Atom text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1">Activity</h4>
+                                        <span>{{item.activity}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Map-Marker text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1">Location</h4>
+                                        <span>{{item.geoCountry}} {{item.geoCity}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Dollar-Sign-2 text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1 ">Price</h4>
+                                        <span>{{item.fromAmount| currency}} ~ {{item.toAmount| currency}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Calendar-4 text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1">Published Date</h4>
+                                        <span>{{item.publishDate | date: 'yyyy-MM-dd'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Calendar-4 text-32 mr-3"></i>
+                                    <div>
+                                        <h4 class="text-18 mb-1 ">Updated Date</h4>
+                                        <span>{{item.updateDate| date: 'yyyy-MM-dd'}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 mb-4">
+                                <div class="p-4 border border-light rounded d-flex align-items-center">
+                                    <i class="i-Information text-32 mr-3"></i>
+                                    <div>
+                                        <span>{{item.about}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div id="visor-video" class="mb-4">
+            <iframe width="100%" height="450px" [src]="displayURL">
+            </iframe>
+        </div>
+        <div class="col-lg-12 col-md-12 mb-4 mmt-4">
+                <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="contact-header">
+                                <div class="user_picture">
+                                    <img class="card-img-left" [src]="user.picture" alt="">
+                                </div>
+                                <div class="card-title ml-20">User Contact Details.
+                                        <span *ngIf="role === '1'">(Role: {{user.role === '1' ? 'Administrator' : 'General User'}})</span>
+                                </div>
+                            </div>
+                            <p class="text-small text-muted"></p>
+                            <div class="row">
+                                <!-- <div class="col-lg-6 col-md-12 mb-4" *ngIf="role === '1'">
+                                    <div class="p-4 border border-light rounded d-flex align-items-center">
+                                        <i class="i-Administrator text-32 mr-3"></i>
+                                        <div>
+                                            <h4 class="text-18 mb-1">User Role</h4>
+                                            <span>{{user.role === '1' ? 'Administrator' : 'General User'}}</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-6 col-md-12 mb-4">
+                                    <div class="p-4 border border-light rounded d-flex align-items-center">
+                                        <i class="i-Email text-32 mr-3"></i>
+                                        <div>
+                                            <h4 class="text-18 mb-1 ">Email</h4>
+                                            <span><a [href]="'mailto:'+user.email" target="_blank">{{user.email }}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 mb-4">
+                                    <div class="p-4 border border-light rounded d-flex align-items-center">
+                                        <i class="i-Telephone text-32 mr-3"></i>
+                                        <div>
+                                            <h4 class="text-18 mb-1">Phone Number</h4>
+                                            <span>{{user.phoneNumber}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 mb-4">
+                                    <div class="p-4 border border-light rounded d-flex align-items-center">
+                                        <i class="i-Facebook-2 text-32 mr-3"></i>
+                                        <div>
+                                            <h4 class="text-18 mb-1">FaceBook</h4>
+                                            <span><a [href]="user.facebook" target="_blank">{{user.facebook }}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 mb-4">
+                                    <div class="p-4 border border-light rounded d-flex align-items-center">
+                                        <i class="i-Linkedin-2 text-32 mr-3"></i>
+                                        <div>
+                                            <h4 class="text-18 mb-1">Linkedin</h4>
+                                            <span><a [href]="user.linkdin" target="_blank">{{user.linkdin }}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+    
+                            </div>
+                        </div>
+                    </div>
+           
+        </div>
+    </div>
+   
+    <div class="ml-30">
+        <button type="button" *ngIf= "itemOwn" class="btn btn-info btn-lg btn-rounded m-1" (click)="itemEdit()">
+                <i class="i-Edit"></i> &nbsp;&nbsp;Edit</button>
+        <button type="button"  class="btn btn-success btn-lg btn-rounded m-1" (click)="gotoList()">
+                <i class="i-Left"></i> Cancel</button>
+    </div>
+    
+
+
+</div>

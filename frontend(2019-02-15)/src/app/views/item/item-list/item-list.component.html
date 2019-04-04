@@ -1,0 +1,176 @@
+<div class="breadcrumb">
+  <h1>Submitted Opportunities</h1>
+  
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+<div class="row mb-4">
+  <!-- GRID AND LIST BUTTONS -->
+  <div class="col-8">
+    <button class="btn btn-sm btn-rounded btn-outline-light btn-svg mr-2" [ngClass]="{active: viewMode === 'grid'}" (click)="viewMode = 'grid'">
+      <svg version="1.1" width="16px" id="grid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px" y="0px" viewBox="0 0 369.946 369.946" style="enable-background:new 0 0 369.946 369.946;" xml:space="preserve">
+        <path d="M250.609,0h-11.934H131.271h-11.934H0v119.337v11.934v107.404v11.934v119.337h119.337h11.934
+            h107.404h11.934h119.337V250.609v-11.934V131.271v-11.934V0H250.609z M238.675,11.934v107.404H131.271V11.934H238.675z
+             M238.675,131.271v107.404H131.271V131.271H238.675z M11.934,11.934h107.404v107.404H11.934V11.934z M11.934,131.271h107.404
+            v107.404H11.934V131.271z M11.934,358.012V250.609h107.404v107.404H11.934z M131.271,358.012V250.609h107.404v107.404H131.271z
+             M358.012,358.012H250.609V250.609h107.404V358.012z M358.012,238.675H250.609V131.271h107.404V238.675z M250.609,119.337V11.934
+            h107.404v107.404H250.609z" />
+      </svg>
+    </button>
+    <button class="btn btn-sm btn-rounded btn-outline-light btn-svg" [ngClass]="{active: viewMode === 'list'}" (click)="viewMode = 'list'">
+      <svg version="1.1" id="list" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+        y="0px" width="16px" height="16px" viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+        <path d="M0,97.92v24.48h612V97.92H0z M0,318.24h612v-24.48H0V318.24z M0,514.08h612V489.6H0V514.08z" />
+      </svg>
+    </button>
+    
+    <span class=" all-item">My Features</span>
+    <label class="switch switch-info mr-3 all-item-select" ngbPopover="Switch it to see your own items!"
+    triggers="mouseenter:mouseleave" popoverTitle="Tooltip">
+      <span>All Items</span>
+      <input type="checkbox"  (change) = "changeItemMode($event, checkMode)" [(ngModel)]="checkMode">
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <!-- SELECT CEHECKBOX -->
+  
+</div>
+<div class="row">
+  <div class="input-group mb-3 col-6 col-md-2">
+    <div class="input-group-prepend">
+        <span class="input-group-text " id="basic-addon3">Type</span>
+    </div>
+    <select class="form-control" [(ngModel)]="searchItemData.type" (change)="filterData()">
+      <option *ngFor="let type of typeArr"
+              [value]="type.name">{{type.name}}
+      </option>
+    </select>
+  </div>
+  <div class="input-group mb-3 col-6 col-md-2">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Interest</span>
+    </div>
+    <!-- <select class="form-control" [(ngModel)]="searchItemData.interest" (change)="filterData()">
+      <option *ngFor="let interest of interestArr"
+              [value]="interest.name">{{interest.name}}
+      </option>
+    
+    </select> -->
+    <ss-multiselect-dropdown [ngbPopover]="searchItemData.interest"
+    triggers="mouseenter:mouseleave" popoverTitle="Selected Interest"  [texts]="interestTexts" [settings]="activitySettings" [options]="interestOptions" [(ngModel)]="interestModel" (ngModelChange)="onChangeInterest($event)"  style="width: calc( 100% - 72px );"></ss-multiselect-dropdown>
+  </div>
+  <div class="input-group mb-3 col-6 col-md-2">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Activity</span>
+    </div>
+   
+    <ss-multiselect-dropdown [ngbPopover]="searchItemData.activity"
+    triggers="mouseenter:mouseleave" popoverTitle="Selected Activities"  [texts]="activityTexts" [settings]="activitySettings" [options]="activityOptions" [(ngModel)]="activityModel" (ngModelChange)="onChangeActivity($event)"  style="width: calc( 100% - 72px );"></ss-multiselect-dropdown>
+  </div>
+  <div class="input-group mb-3 col-6 col-md-2">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Location</span>
+    </div>
+
+    <ss-multiselect-dropdown  [ngbPopover]="searchItemData.geoCountry"
+    triggers="mouseenter:mouseleave" popoverTitle="Selected Locations" [texts]="countryTexts" [settings]="countrySettings" [options]="countryOptions" [(ngModel)]="countryModel" (ngModelChange)="onChangeCountry($event)" style="width: calc( 100% - 78px );" ></ss-multiselect-dropdown>
+  </div>
+  <div class="input-group mb-3 col-12 col-md-4">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">From ($)</span>
+    </div>
+    <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" (input)="filterData()" [(ngModel)]="searchItemData.fromAmount">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">To ($)</span>
+    </div>
+    <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" (input)="filterData()" [(ngModel)]="searchItemData.toAmount">
+  </div>
+</div>
+
+<!-- DATA LIST -->
+<div class="row" [ngClass]="{'list-horizontal': viewMode === 'list', 'list-grid': viewMode === 'grid'}">
+  <!-- SINGLE LIST ITEM -->
+  <div *ngFor="let item of filteredItems ; let i = index" 
+    class="list-item"
+    [ngClass]="{'col-md-12': viewMode === 'list', 'col-md-3': viewMode === 'grid'}"
+    [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
+  >
+    <div class="card o-hidden mb-4 d-flex" [ngClass]="{'flex-row': viewMode === 'list', 'flex-column': viewMode === 'grid'}" >
+      <div class="list-thumb d-flex" (click) = "editItem(item._id)">
+        <!-- TUMBNAIL -->
+        <img [src]="item.picture" alt="">
+      </div>
+      <div class="flex-grow-1" [ngClass]="{'pl-2 d-flex': viewMode === 'list', 'd-bock': viewMode === 'grid'}">
+        <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center" (click) = "editItem(item._id)"
+          [ngClass]="{'flex-lg-row': viewMode === 'list'}">
+          <!-- OTHER DATA -->
+          <div class="first_row flex1">
+            <div [ngClass]="'text-' + typeIcon[item.type]" class="item-title flex1"><i [ngClass]="typeIcon[item.type]"></i> {{item.type }} </div>
+            <div class="item-title flex1 desktop"><i class="i-Map-Marker"></i> {{item.geoCountry }} {{item.geoCity}}</div>
+          </div>
+          <div class="first_row flex1">
+            <div class="item-title flex1 interest"><i [ngClass]="interestIcon[item.interest]"></i> {{item.interest }} </div>
+            <div class="item-title flex1 desktop">
+              <i class="i-Dollar-Sign-2"></i>{{item.fromAmount}}~<i class="i-Dollar-Sign-2"></i>{{item.toAmount}}
+            </div>
+          </div>
+          <div class="first_row flex1">
+              <p class="m-0 text-muted item-title text-flow w-15 w-sm-100 flex1 activity">
+                <i [ngClass]="activityIcon[item.activity]"></i> {{item.activity }}
+              </p>
+              <p class="text-flow item-title  flex1 m-b-0" *ngIf = "role == '1'" (click) = "editItemDirectly(item._id)">
+                <a><i class="i-Edit"></i> Edit</a>
+              </p>
+          </div>
+          
+          <p class="m-0 text-muted text-badge w-15 w-sm-100 d-none d-lg-block item-badges flex_5">
+            <span class="badge" [ngClass]="item.type + '-info'">{{item.type}}</span>
+          </p>
+          
+        </div>
+        <div class="align-self-center pl-3 pb-2 pr-3 item-select">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- PAGINATION CONTROL -->
+  <div class="col-md-12 mt-3 hidden" *ngIf="items?.length">
+    <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+  
+  <div class="col-md-12 mt-3" *ngIf="filteredItems.length">
+      <ul *ngIf="pages>0" class="ngx-pagination ng-star-inserted" role="navigation" aria-label="Pagination">
+          <li class="pagination-previous ng-star-inserted" [ngClass] = "{'disabled' : current == 1}" (click)="gotoPreviousPage()">
+              <div [ngClass]="{'hidden': current != 1}"><span class="ng-star-inserted">  <span class="show-for-sr">page</span></span></div>
+              <div [ngClass]="{'hidden': current == 1}"><a tabindex="0" aria-label=" page" class="ng-star-inserted">  <span class="show-for-sr">page</span></a></div>
+          </li>
+          <li class="small-screen">
+              1 / {{pages}} 
+          </li>
+          <li class="ng-star-inserted" *ngIf="index !== 1" (click)="gotoPage(1)">
+              <a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>1</span></a>
+          </li>
+          <li class="ng-star-inserted" *ngIf="index !== 1">
+              <a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>...</span></a>
+          </li>
+          <li class="ng-star-inserted" *ngFor="let i of index_arr" [ngClass]="{'current': i == current}" (click)="gotoPage(i)">
+            <div [ngClass]="{'hidden': i != current}"><span class="show-for-sr ng-star-inserted "  >You're on page </span><span class="ng-star-inserted">{{i}}</span></div>
+            <div [ngClass]="{'hidden': i == current}"><a class="ng-star-inserted" tabindex="0" ><span class="show-for-sr">page </span><span class="ng-tns-c10-1">{{i}}</span></a></div>
+          </li>
+          <li class="ng-star-inserted" *ngIf="last_index <= pages">
+              <a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>...</span></a>
+          </li>
+          <li class="ng-star-inserted" *ngIf="last_index <= pages" (click)="gotoPage(pages)">
+              <a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>{{pages}}</span></a>
+          </li>
+          <li class="pagination-next ng-star-inserted" [ngClass] = "{'disabled' : current == pages}" (click)="gotoNextPage()">
+              <div [ngClass]="{'hidden': current != pages}"><span class="ng-star-inserted">  <span class="show-for-sr">page</span></span></div>
+              <div [ngClass]="{'hidden': current == pages}"><a tabindex="0" aria-label=" page" class="ng-star-inserted">  <span class="show-for-sr">page</span></a></div>
+          </li>
+          
+      </ul>
+      
+  </div>
+</div>

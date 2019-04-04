@@ -1,0 +1,130 @@
+.list-horizontal .list-item .list-thumb img {
+    height: 74px;
+    width: 120px;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.text-badge {
+    font-size: 1.2rem;
+}
+
+.first_row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.list-grid .list-item .item-title {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 150px;
+    flex: 1;
+}
+
+.text-flow{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 300px;
+}
+
+.flex1 {
+    flex : 1;
+}
+.flex_5 {
+    flex: 0.5;
+}
+@media screen and (max-width : 600px){
+    .desktop {
+        display:none;
+    }
+    .all-item-select{
+        margin-left: 10px !important;
+    }
+    .all-item{
+        display:none;
+    }
+}
+
+@media (max-width: 991px){
+    .list-horizontal .list-item .list-thumb img {
+        height: 100%;
+        width: 100px;
+    }
+}
+
+@media (min-width: 768px){
+    .col-mmd-5 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+    .all-item{
+        margin-left: 30px;
+    }
+}
+
+
+.all-item-select{
+    margin-left: 10px;
+}
+
+.switch {
+    height: 19px;
+}
+.switch .slider {
+    top: 3px;
+}
+
+.switch span:not(.slider) {
+    top: 3px;
+}
+.card{
+    cursor: pointer;
+}
+
+.m-b-0{
+    margin-bottom: 0px;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.badge{
+    font-size: 12px;
+    padding: 0.4rem !important;
+}
+.overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay i{
+    font-size: 108px;
+    color: rgb(180,180,180)
+}
+
+.overlay_list{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay_list i{
+    font-size: 50px;
+    color: rgb(180,180,180)
+}
+
+.parent_list{
+    position: relative
+}

@@ -1,0 +1,130 @@
+<div class="breadcrumb">
+    <h1>Create Dummy Data</h1>
+    
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">
+                    Load Dummy Data from Local Jsons    
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="onDummyUpload()">
+                            <i class="i-Data-Download"></i>&nbsp; Initial Load from Json</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Upload Dummy Users and Items</div>
+              
+                    <div class="row">
+                        
+                        <div class="col-md-4">
+                            <label for="picture">Please Choose Users Count and Items Per User</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Users</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="number" [(ngModel)]="userCount" class="form-control" id="userCount" placeholder="Enter User Count" min='1' >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="picture"><br></label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Items</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="number" [(ngModel)]="itemCount" class="form-control" id="itemCount" placeholder="Enter Item Count"  min='1'>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                        <div class="col-md-4">
+                            <br>
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="onDummyCreate()">
+                                <i class="i-Data-Save"></i>&nbsp; Create Dummy Users and Items</button>
+                              
+                            <!-- <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading> -->
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #smallModal_view [class.show]="false" (click)="openSmall(modalSmall)">Launch Modal</button>
+                        <ng-template #modalSmall let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Save</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Saved Successfully.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                            </div>
+                        </ng-template>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #errorModal_view [class.show]="false" (click)="openSmall(modalError)">Launch Modal</button>
+                        <ng-template #modalError let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title"><i class="i-Idea"></i>Error</h4>
+                                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Not found Data for Creating dummy Users and Items on MongoDB. Please Click "Initial Load from Json".</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                            </div>
+                        </ng-template>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Item Default Picture</div>
+                    <div class="row">
+                        
+                        <div class="col-md-12">
+                            <label for="picture">Picture</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="photo" aria-describedby="photo" (change) = "onFileSelected($event)">
+                                    <label class="custom-file-label" for="photo">{{currentUserData.picture!=='' && currentUserData.picture.split(".").length === 2 ? currentUserData.picture : currentUserData.picture.split(".")[1]+"."+currentUserData.picture.split(".")[2]}}</label>
+                                </div>
+
+                            </div>
+                        </div>
+                       
+
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="upDateUser()">
+                                <i class="i-Data-Save"></i>&nbsp; Update</button>
+                        </div>
+
+                        
+                    </div>
+            </div>
+        </div>
+    </div> -->
+   
+
+</div>

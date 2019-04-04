@@ -1,0 +1,159 @@
+<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+  <div class="row">
+    <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/photo-long-3.jpg)">
+      <div class="pl-3 auth-right">
+        <div class="auth-logo text-center mt-4">
+          <img src="assets/images/logo.png" alt="">
+        </div>
+        <div class="flex-grow-1"></div>
+        <div class="w-100 mb-4">
+
+        </div>
+        <div class="flex-grow-1"></div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="p-4">
+        <a href="" (click)="gotoLogin($event)" class="login_link"><i class="i-Left"></i> Sign In</a>
+        <h1 class="mb-3 text-18">Sign Up</h1>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- <p class="mb-4 text-muted font-small">Lorem ipsum dolor sit amet.</p> -->
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="firstName">First name</label>
+              <!-- <input [(ngModel)]="registerUserData.userName" id="userName" class="form-control form-control-rounded" type="text"> -->
+              <input formControlName="firstName" id="firstName" class="form-control form-control-rounded" type="text" (change) = "hideAllErrMsg()"
+                required>
+              <label *ngIf="submitted && f.firstName.errors && f.firstName.errors.required" class="feedback-error">firstName
+                is required</label>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName">Last name</label>
+              <!-- <input [(ngModel)]="registerUserData.userName" id="userName" class="form-control form-control-rounded" type="text"> -->
+              <input formControlName="lastName" id="lastName" class="form-control form-control-rounded" type="text" (change) = "hideAllErrMsg()"
+                required>
+              <label *ngIf="submitted && f.lastName.errors && f.lastName.errors.required" class="feedback-error">lastName
+                is required</label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <!-- <input [(ngModel)]="registerUserData.email" id="email" class="form-control form-control-rounded" type="email"> -->
+            <input id="email" formControlName="email" class="form-control form-control-rounded" type="email" (change) = "hideAllErrMsg()">
+            <label *ngIf="submitted && f.email.errors && f.email.errors.required" class="feedback-error">Email is
+              required</label>
+            <label *ngIf="submitted && f.email.errors && f.email.errors.email" class="feedback-error">Email must be a
+              valid email address</label>
+            <label *ngIf="email_duplicate" class="feedback-error">Email already Exist!</label>
+
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" class="form-control form-control-rounded" type="password" (change) = "hideAllErrMsg()">
+            <!-- <input [(ngModel)]="registerUserData.password" id="password" class="form-control form-control-rounded" type="password"> -->
+            <label *ngIf="submitted && f.password.errors && f.password.errors.required" class="feedback-error">Password
+              is required</label>
+            <label *ngIf="submitted && f.password.errors && f.password.errors.minlength" class="feedback-error">Password
+              must be at least 6 characters</label>
+
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Retype password</label>
+            <input id="confirmPassword" formControlName="confirmPassword" class="form-control form-control-rounded"
+              type="password">
+            <label *ngIf="submitted && f.confirmPassword.errors && f.confirmPassword.errors.required" class="feedback-error">Confirm
+              Password is required</label>
+            <label *ngIf="submitted && f.confirmPassword.errors && f.confirmPassword.errors.mustMatch" class="feedback-error">Passwords
+              must match</label>
+          </div>
+          <!-- <button (click)="registerUser()" class="btn btn-primary btn-block btn-rounded mt-3">Sign Up</button> -->
+          <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LfxUooUAAAAAKmTCaPUUpQ0Z0UEhV8lmzOjSWU_"></re-captcha> -->
+          <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" class="captcha" [site_key]="captchaSiteKey"></re-captcha>
+          <label class="" >
+            <input type="checkbox" [checked]="agree_val" (change)="agree()" (ngModelChange) = "agree_val"> I accept the&nbsp;
+          </label>
+          <a class="termsLink" (click)="showTermsPrivacy()">Terms and Privacy</a>
+          <label *ngIf="out_maxSignupCount" class="feedback-error">You can't create any more. The maximum account count with this IP address is 3.</label>
+          <button [disabled]="!eventCaptcha || !agree_val" class="btn btn-primary btn-block btn-rounded mt-3">Sign Up</button>
+        </form>
+        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #termsModal_view [class.show]="false"
+        (click)="openSmall(modalSmall)">Terms Modal</button>
+          
+        <ng-template #modalSmall let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Terms and Privacy</h4>
+            <button type="button" class="close" aria-label="Close"  (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <h2>Terms of Use ("Terms")</h2>
+            <p>Last updated: January 21, 2019</p>
+            <p>Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the
+              https://www.smb.com website (the "Service") operated by SMBUSINESS ("us", "we", or "our").</p>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these
+              Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+            <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part
+              of the terms then you may not access the Service. The Terms of Use agreement for SMBUSINESS has been
+              created with the help of <a href="https://termsfeed.com/">TermsFeed</a>.</p>
+            <h3>Accounts</h3>
+            <p>When you create an account with us, you must provide us information that is accurate, complete, and
+              current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate
+              termination of your account on our Service.</p>
+            <p>You are responsible for safeguarding the password that you use to access the Service and for any
+              activities or actions under your password, whether your password is with our Service or a third-party
+              service.</p>
+            <p>You agree not to disclose your password to any third party. You must notify us immediately upon
+              becoming aware of any breach of security or unauthorized use of your account.</p>
+            <h3>Links To Other Web Sites</h3>
+            <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by
+              SMBUSINESS.</p>
+            <p> SMBUSINESS has no control over, and assumes no responsibility for, the content, privacy policies, or
+              practices of any third party web sites or services. You further acknowledge and agree that SMBUSINESS
+              shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to
+              be caused by or in connection with use of or reliance on any such content, goods or services available
+              on or through any such web sites or services.</p>
+            <p>We strongly advise you to read the terms and conditions and privacy policies of any third-party web
+              sites or services that you visit.</p>
+            <h3>Termination</h3>
+            <p>We may terminate or suspend access to our Service immediately, without prior notice or liability, for
+              any reason whatsoever, including without limitation if you breach the Terms.</p>
+            <p>All provisions of the Terms which by their nature should survive termination shall survive
+              termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and
+              limitations of liability.</p>
+            <p>We may terminate or suspend your account immediately, without prior notice or liability, for any
+              reason whatsoever, including without limitation if you breach the Terms.</p>
+            <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your
+              account, you may simply discontinue using the Service.</p>
+            <p>All provisions of the Terms which by their nature should survive termination shall survive
+              termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and
+              limitations of liability.</p>
+            <h3>Governing Law</h3>
+            <p>These Terms shall be governed and construed in accordance with the laws of Israel, without regard to
+              its conflict of law provisions.</p>
+            <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those
+              rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the
+              remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement
+              between us regarding our Service, and supersede and replace any prior agreements we might have between
+              us regarding the Service.</p>
+            <h3>Changes</h3>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a
+              revision is material we will try to provide at least 60 days notice prior to any new terms taking
+              effect. What constitutes a material change will be determined at our sole discretion.</p>
+            <p>By continuing to access or use our Service after those revisions become effective, you agree to be
+              bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
+            <h3>Contact Us</h3>
+            <p>If you have any questions about these Terms, please contact us.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info"  (click)="termsReadFlag = true; agree_val = true; modal.close('ok')">I agree</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

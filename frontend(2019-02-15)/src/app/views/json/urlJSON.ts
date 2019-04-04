@@ -1,0 +1,30 @@
+import { environment } from '../../../environments/environment';
+const base_url = environment.baseUrl; // local environment
+export const UrlJSON = {
+  registerUrl: base_url + 'api/signup',
+  loginUrl: base_url + 'api/signin',
+  forgotUrl: base_url + 'api/forgot',
+  resetUrl: base_url + 'api/reset',
+  validCaptchaUrl: base_url + 'api/validCaptchaUrl',
+  displayAvatarFromFSUrl: base_url + 'api/displayAvatarFromFS/',
+  displayPictureUrl: base_url + 'api/displayPicture/',
+  displayPictureFromFSUrl: base_url + 'api/displayPictureFromFS/',
+  addItemUrl: base_url + 'api/addItem',
+  getItemsUrl: base_url + 'api/getItems',
+  getItemsForSearchUrl: base_url + 'api/getItemsForSearch',
+  getItemByIdUrl: base_url + 'api/getItemById',
+  getDisplayItemByIdUrl: base_url + 'api/getDisplayItemById',
+  removeItemsUrl: base_url + 'api/removeItems',
+  updateItemUrl: base_url + 'api/updateItem',
+  getUserUrl: base_url + 'api/getUsers',
+  addUserUrl: base_url + 'api/addUser',
+  getUserByIDUrl: base_url + 'api/getUserByID',
+  getUserForSearchUrl: base_url + 'api/getUserForSearch',
+  updateUserUrl: base_url + 'api/updateUser',
+  updateUserbyRegularUrl: base_url + 'api/updateUserbyRegular',
+  removeUserUrl: base_url + 'api/removeUser',
+  loadFromLocalToDbUrl: base_url + 'api/loadFromLocalToDb',
+  createDummyDataUrl: base_url + 'api/createDummyData',
+  uploadPictureUrl: base_url + 'api/uploadItemPicture',
+  uploadPictureToMongoUrl: base_url + 'api/uploadPictureToMongoose'
+};

@@ -1,0 +1,161 @@
+<div class="breadcrumb">
+    <h1>Item Add</h1>
+   
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+   
+
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Add(Register) Item</div>
+                    <div class="row">
+                        <form [formGroup]="addItemForm"  class="addItemForm">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="type">Type</label>
+                            <select class="form-control form-control-rounded"  formControlName = "type" >
+                                <option *ngFor="let typeitem of typeArr; let i = index"  [value]="typeitem.name"> {{typeitem.name}}
+                                </option>
+                            </select>
+                            <label *ngIf="submitted && f.type.errors && f.type.errors.required" class="feedback-error">Type
+                                is required</label>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="interest">Interest</label>
+                            <select class="form-control form-control-rounded" formControlName = "interest" >
+                                <option *ngFor="let interestitem of interestArr" [value]="interestitem.name"> {{interestitem.name}}
+                                </option>
+                            </select>
+                            <label *ngIf="submitted && f.interest.errors && f.interest.errors.required" class="feedback-error">Interest
+                                is required</label>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="activity">Activity</label>
+                            <select class="form-control form-control-rounded" formControlName = "activity" >
+                                <option *ngFor="let activityitem of activityArr" [value]="activityitem.name">{{activityitem.name}}
+                                </option>
+                            </select>
+                            <label *ngIf="submitted && f.activity.errors && f.activity.errors.required" class="feedback-error">Activity
+                                is required</label>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="about">About</label>
+                            <input type="text" formControlName = "about"  class="form-control form-control-rounded" id="about"
+                                 placeholder="Enter About">
+                            <label *ngIf="submitted && f.about.errors && f.about.errors.required" class="feedback-error">About
+                                        is required</label>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="country">Country</label>
+                            <select class="form-control form-control-rounded" formControlName = "geoCountry">
+                                <option *ngFor="let geoCountryitem of countryArr" [value]="geoCountryitem.name">{{geoCountryitem.name}}
+                                </option>
+                            </select>
+                            <label *ngIf="submitted && f.geoCountry.errors && f.geoCountry.errors.required" class="feedback-error">Country
+                                is required</label>
+                        </div>
+                      
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">City</label>
+                            <input type="text" formControlName = "geoCity" class="form-control form-control-rounded" id="city" placeholder="Enter City">
+                            <label *ngIf="submitted && f.geoCity.errors && f.geoCity.errors.required" class="feedback-error">City
+                                    is required</label>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="video">Video</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">https://www.youtube.com/embed/</span>
+                                </div>
+                                <input type="text" formControlName = "video" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Ex: 5WICgADzDqw">
+                            </div>
+                            <label *ngIf="submitted && f.video.errors && f.video.errors.required" class="feedback-error">Video Url
+                                    is required</label>
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="fromAmount">From Amount</label>
+                            <input type="number" (keypress)="_keyPress($event)" formControlName = "fromAmount" class="form-control form-control-rounded" id="fromAmount" placeholder="Enter fromAmount" [ngModel] ="defaultFromAmount" (ngModelChange) = "defaultFromAmount1" >
+                            <label class="feedback-error" *ngIf="submitted && f.fromAmount.errors && f.fromAmount.errors.fromAmountLess" >From Amount must be greater than 1000</label>
+                            <label *ngIf="submitted && f.fromAmount.errors && f.fromAmount.errors.required" class="feedback-error">From Amount
+                                is required</label>
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="toAmount">To Amount</label>
+                            <input type="number" (keypress)="_keyPress($event)" formControlName = "toAmount" class="form-control form-control-rounded" id="toAmount" placeholder="Enter toAmount" [ngModel] ="defaultToAmount" (ngModelChange) = "defaultToAmount">
+                            <label class="feedback-error" *ngIf="submitted && f.toAmount.errors && f.toAmount.errors.toAmountLess" >To Amount must be greater than 1000</label>
+                            <label *ngIf="submitted && f.toAmount.errors && f.toAmount.errors.required" class="feedback-error">To Amount
+                                is required</label>
+                            <label *ngIf="submitted && f.toAmount.errors && f.toAmount.errors.biggerMatch" class="feedback-error">To Amount must be greater than From Amount
+                                </label>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="picture">Picture</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" accept="image/*" id="photo" aria-describedby="photo" (change) = "onFileSelected($event)">
+                                    <label class="custom-file-label" for="photo">{{chooseFileName}}</label>
+                                </div>
+
+                            </div>
+                            <label class="feedback-error" *ngIf="fileType">You must choose image files</label>
+
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <label for="details">Details</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Details</span>
+                                </div>
+                                <textarea class="form-control" aria-label="details" formControlName = "details"></textarea>
+                            </div>
+                            <label *ngIf="submitted && f.details.errors && f.details.errors.required" class="feedback-error">Details
+                                is required</label>
+                        </div>
+                       
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="addItem()">
+                                <i class="i-Data-Save"></i>&nbsp; Save</button>
+                            <button type="button" class="btn btn-success btn-lg btn-rounded m-1" (click)="cancel()">
+                                <i class="i-Left"></i>&nbsp; Cancel</button>
+                            <!-- <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading> -->
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #smallModal_view [class.show]="false" (click)="openSmall(modalSmall)">Launch Modal</button>
+                        
+                    </form>
+                    <ng-template #modalSmall let-modal>
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modal-basic-title">{{modal_title}}</h4>
+                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{modal_content}}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                        </div>
+                    </ng-template>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>

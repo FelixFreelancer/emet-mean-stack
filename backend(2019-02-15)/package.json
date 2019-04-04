@@ -1,0 +1,47 @@
+{
+  "name": "emet",
+  "version": "1.0.0",
+  "description": "An Emet Website API built with NodeJS, Express, MongoDB and TypeScript",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "ts-node ./lib/server.ts",
+    "start": "nodemon ./dist/server.js",
+    "prod": "npm run build && npm run start"
+  },
+  "keywords": [
+    "Emethorizen"
+  ],
+  "author": "Emethorizen",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "csurf": "^1.9.0",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-sanitizer": "^1.0.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "gridfs-stream": "^1.1.1",
+    "jsonwebtoken": "^8.4.0",
+    "method-override": "^3.0.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.4.3",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3",
+    "node-datetime": "^2.1.2",
+    "nodemailer": "^4.7.0",
+    "nodemon": "^1.18.9",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.0"
+  }
+}

@@ -1,0 +1,26 @@
+<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="p-4">
+          <div class="auth-logo text-center mb-4">
+            <img src="assets/images/logo.png" alt="">
+          </div>
+          <h1 class="mb-3 text-18">Forgot Password</h1>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input id="email" [(ngModel)] = "data.emailForResetPassword" class="form-control form-control-rounded" type="email">
+              <label *ngIf="invalidEmail" class="feedback-error">This Email is not exist.</label>
+              <label *ngIf="successEmail" class="feedback-success">Sent Successfully. Please check your mailbox</label>
+            </div>
+            <button class="btn btn-primary btn-block btn-rounded mt-3" (click)="forget()">Reset Password</button>
+            
+          <div class="mt-3 text-center">
+            <a href="" class="text-muted" routerLink="/auth/signin"><u>Sign in</u></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/photo-long-3.jpg)">
+        
+      </div>
+    </div>
+  </div>

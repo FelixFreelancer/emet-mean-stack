@@ -1,0 +1,187 @@
+<div class="breadcrumb">
+    <h1>User Edit</h1>
+    
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+   
+
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Edit(Update) User</div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" [(ngModel)]="currentUserData.firstName" class="form-control form-control-rounded" id="firstName" placeholder="Enter your first name">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" [(ngModel)]="currentUserData.lastName" class="form-control form-control-rounded" id="lastName" placeholder="Enter your last name">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="text" [(ngModel)]="currentUserData.email" class="form-control form-control-rounded" id="password"
+                                aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+
+                        <!-- <div class="col-md-6 form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="text" [(ngModel)]="currentUserData.password" readonly class="form-control form-control-rounded" id="password"
+                                 placeholder="Enter Password">
+                        </div> -->
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="country">Country</label>
+                            <!-- <input type="text" [(ngModel)]="currentUserData.country"  class="form-control form-control-rounded" id="country" placeholder="Enter Country"> -->
+                            <select class="form-control form-control-rounded" [(ngModel)]="currentUserData.country" id="country">
+                                <option *ngFor="let country of countryArr"
+                                        [value]="country.name">{{country.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">City</label>
+                            <input type="text" [(ngModel)]="currentUserData.city" class="form-control form-control-rounded" id="city" placeholder="Enter City">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">CompanyName</label>
+                            <input type="text" [(ngModel)]="currentUserData.companyName" class="form-control form-control-rounded" id="companyName" placeholder="Enter CompanyName">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="jobTitle">JobTitle</label>
+                            <input type="text" [(ngModel)]="currentUserData.jobTitle" class="form-control form-control-rounded" id="jobTitle" placeholder="Enter JobTitle">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="facebook">FaceBook</label>
+                            <input type="text" [ngModel]="currentUserData.facebook | decodeHtmlString"  (ngModelChange)="facebookChange($event)"  class="form-control form-control-rounded" id="faceBook" placeholder="Enter Facebook URL">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="linkdin">Linkdin</label>
+                            <input type="text" [ngModel]="currentUserData.linkdin | decodeHtmlString" (ngModelChange) = "linkdinChange($event)" class="form-control form-control-rounded" id="Linkdin" placeholder="Enter Linkdin URL">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="phoneNumber">PhoneNumber</label>
+                            <input type="text" [(ngModel)]="currentUserData.phoneNumber" class="form-control form-control-rounded" id="phoneNumber" placeholder="Enter PhoneNumber">
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3" *ngIf="role == '1'">
+                            <label for="role">Role</label>
+                            <div style='display: flex' [formGroup]="radioGroup">
+                                <label class="radio radio-primary mr-3" >
+                                    <input type="radio" name="radio"  [value]="0" formControlName="radio" checked="checked">
+                                    <span>User</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio radio-success mr-3">
+                                    <input type="radio" name="radio" [value]="1" formControlName="radio">
+                                    <span>Admin</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3 form-group mb-3" *ngIf="role == '1'">
+                            <label for="active">Active</label>
+                            <div style='display: flex' [formGroup]="radioGroup_active">
+                                <label class="radio radio-primary mr-3">
+                                    <input type="radio" name="radio_active" [value]="0" formControlName="radio_active" checked="checked">
+                                    <span>Active</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="radio radio-danger mr-3">
+                                    <input type="radio" name="radio_active" [value]="1" formControlName="radio_active">
+                                    <span>Deactive</span>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <label for="picture">Picture</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="photo" accept="image/*"  aria-describedby="photo" (change) = "onFileSelected($event)">
+                                    <label class="custom-file-label" for="photo">{{currentUserData.picture!=='' && currentUserData.picture.split(".").length === 2 ? currentUserData.picture : currentUserData.picture.split(".")[1]+"."+currentUserData.picture.split(".")[2]}}</label>
+                                </div>
+
+                            </div>
+                            <label class="feedback-error" *ngIf="fileType">You must choose image files</label>
+
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <label for="comments">Comments</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Comments</span>
+                                </div>
+                                <textarea class="form-control" aria-label="Comments" [(ngModel)]="currentUserData.comments" ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="upDateUser()">
+                                <i class="i-Data-Save"></i>&nbsp; Save</button>
+                            <button type="button" class="btn btn-danger btn-lg btn-rounded m-1" (click)="removeUser()">
+                                <i class="i-Securiy-Remove"></i>&nbsp; Remove</button>
+                            <button type="button" class="btn btn-success btn-lg btn-rounded m-1" (click)="gotoList()">
+                                <i class="i-Left"></i>&nbsp; Cancel</button>
+                            <!-- <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading> -->
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #smallModal_view [class.show]="false" (click)="openSmall(modalSmall)">Launch Modal</button>
+                        <ng-template #modalSmall let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Save</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Saved Successfully.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                            </div>
+                        </ng-template>
+
+                        <button class="btn btn-outline-primary btn-rounded" #confirmModal_view (click)="confirm(modalConfirm)" style="display:none">Delete</button>
+                        <ng-template #modalConfirm let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-title">Profile deletion</h4>
+                              <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p><strong>Are you sure you want to delete <span class="text-primary">this</span> profile?</strong></p>
+                              <p>All information associated to this user profile will be permanently deleted.
+                              <span class="text-danger">This operation can not be undone.</span>
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="modal.dismiss('cancel')">Cancel</button>
+                              <button type="button" ngbAutofocus class="btn btn-danger btn-rounded" (click)="modal.close('Ok')">Ok</button>
+                            </div>
+                        </ng-template>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>

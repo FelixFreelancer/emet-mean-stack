@@ -1,0 +1,94 @@
+<div class="search-ui" perfectScrollbar [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+	<div class="search-header">
+		<img src="./assets/images/logo2.png" alt="" class="logo" (click)="goHome()">
+		<button class="btn btn-icon bg-transparent float-right mt-2" (click)="searchService.searchOpen = false">
+			<i class="i-Close-Window text-22 text-muted"></i>
+		</button>
+	</div>
+
+	<input type="text" placeholder="Type here" class="search-input" [formControl]="searchCtrl" (input)="fetchData()" [(ngModel)]="searchData.searchText" autofocus >
+
+	<div class="search-title">
+		<span class="text-muted">Search results</span>
+	</div>
+
+	<div class="search-results list-horizontal">
+		<div *ngFor="let item of filteredItems; let i = index;" 
+			class="list-item col-md-12 p-0" (click) = "editItem(item._id)"
+			[@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}"
+		>
+			<div class="card o-hidden flex-row mb-4 d-flex">
+				<div class="list-thumb d-flex">
+					<!-- TUMBNAIL -->
+					<img [src]="item.picture" alt="">
+
+				</div>
+				<div class="flex-grow-1 pl-2 d-flex" >
+					<div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row" >
+					  <!-- OTHER DATA -->
+					  <div class="first_row flex1">
+						<div class="item-title flex1"><i class="i-Business-Man"></i> {{item.type }} </div>
+						<div class="item-title flex1 desktop"><i class="i-Map-Marker"></i> {{item.geoCountry }} {{item.geoCity}}</div>
+					  </div>
+					  <div class="first_row flex1">
+						<div class="item-title flex1"><i class="i-Friendster"></i> {{item.interest }} </div>
+						<div class="item-title flex1 desktop">
+						  <i class="i-Dollar-Sign-2"></i>{{item.fromAmount}}~<i class="i-Dollar-Sign-2"></i>{{item.toAmount}}
+						</div>
+					  </div>
+					  
+					  <p class="m-0 text-muted text-flow text-small w-15 w-sm-100 flex1">
+						<i class="i-Atom"></i> {{item.activity }}
+					  </p>
+					  <p class="m-0 text-muted text-badge w-15 w-sm-100 d-none d-lg-block item-badges flex_5">
+						<span class="badge badge-info">{{item.type}}</span>
+					  </p>
+					  
+					</div>
+				  </div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGINATION CONTROL -->
+	<!-- <div class="col-md-12 mt-3" *ngIf="results$ | async">
+		<pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+	</div> -->
+
+	<div class="col-md-12 mt-3 hidden" *ngIf="items?.length">
+    <pagination-controls (pageChange)="pageChange($event)" previousLabel="" nextLabel=""></pagination-controls>
+  </div>
+
+	<div class="col-md-12 mt-3" *ngIf="filteredItems.length">
+		<ul *ngIf="pages>0" class="ngx-pagination ng-star-inserted" role="navigation" aria-label="Pagination">
+				<li class="pagination-previous ng-star-inserted" [ngClass] = "{'disabled' : current == 1}" (click)="gotoPreviousPage()">
+						<div [ngClass]="{'hidden': current != 1}"><span class="ng-star-inserted">  <span class="show-for-sr">page</span></span></div>
+						<div [ngClass]="{'hidden': current == 1}"><a tabindex="0" aria-label=" page" class="ng-star-inserted">  <span class="show-for-sr">page</span></a></div>
+				</li>
+				<li class="small-screen">
+						1 / {{pages}} 
+				</li>
+				<li class="ng-star-inserted" *ngIf="index !== 1" (click)="gotoPage(1)">
+						<a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>1</span></a>
+				</li>
+				<li class="ng-star-inserted" *ngIf="index !== 1">
+						<a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>...</span></a>
+				</li>
+				<li class="ng-star-inserted" *ngFor="let i of index_arr" [ngClass]="{'current': i == current}" (click)="gotoPage(i)">
+					<div [ngClass]="{'hidden': i != current}"><span class="show-for-sr ng-star-inserted "  >You're on page </span><span class="ng-star-inserted">{{i}}</span></div>
+					<div [ngClass]="{'hidden': i == current}"><a class="ng-star-inserted" tabindex="0" ><span class="show-for-sr">page </span><span class="ng-tns-c10-1">{{i}}</span></a></div>
+				</li>
+				<li class="ng-star-inserted" *ngIf="last_index <= pages">
+						<a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>...</span></a>
+				</li>
+				<li class="ng-star-inserted" *ngIf="last_index <= pages" (click)="gotoPage(pages)">
+						<a tabindex="0" class="ng-star-inserted"><span class="show-for-sr">page </span><span>{{pages}}</span></a>
+				</li>
+				<li class="pagination-next ng-star-inserted" [ngClass] = "{'disabled' : current == pages}" (click)="gotoNextPage()">
+						<div [ngClass]="{'hidden': current != pages}"><span class="ng-star-inserted">  <span class="show-for-sr">page</span></span></div>
+						<div [ngClass]="{'hidden': current == pages}"><a tabindex="0" aria-label=" page" class="ng-star-inserted">  <span class="show-for-sr">page</span></a></div>
+				</li>
+				
+		</ul>
+		
+</div>
+</div>

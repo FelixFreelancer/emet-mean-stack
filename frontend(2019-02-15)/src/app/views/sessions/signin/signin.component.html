@@ -1,0 +1,46 @@
+<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="p-4">
+          <div class="auth-logo text-center mb-4">
+            <img src="assets/images/logo.png" alt="">
+          </div>
+          <h1 class="mb-3 text-18">Sign In</h1>
+          <form [formGroup]="signinForm" (ngSubmit)="signin()">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input  id="email" class="form-control form-control-rounded" formControlName="email" type="email" #email>
+              <label *ngIf="submitted && f.email.errors && f.email.errors.required" class="feedback-error">Email is required</label>
+              <label *ngIf="submitted && f.email.errors && f.email.errors.email" class="feedback-error">Email must be a valid email address</label>
+              <label *ngIf="invalid_email" class="feedback-error">The Email You Entered is Invalid.</label>
+
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input id="password" class="form-control form-control-rounded" formControlName="password" type="password">
+              <label *ngIf="submitted && f.password.errors && f.password.errors.required" class="feedback-error">Password is required</label>
+              <label *ngIf="invalid_password" class="feedback-error">The Password for {{email.value}} is Invalid.</label>
+              <label *ngIf="deactived_user" class="feedback-error">This User Account is Suspended. Please contact with Administrator.</label>
+            </div>
+            <!-- <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button> -->
+            <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" [loadingText]="loadingText" [loading]="loading">
+              Sign In
+            </btn-loading>
+           
+          </form>
+          <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" [loadingText]="loadingText1" [loading]="loading1" (click) = "signinAnonymous()">
+            Sign In As Anonymous
+          </btn-loading>
+          <div class="mt-3 text-center">
+            <a href="" class="text-muted" routerLink="/auth/forgot"><u>Forgot Password</u>&nbsp;&nbsp;</a>
+            <a href="" class="text-muted" routerLink="/auth/signup">&nbsp;&nbsp;<u>Create New Account</u></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 text-center " style="background-size: cover;background-image: url(./assets/images/photo-long-3.jpg)">
+        <div class="pr-3 auth-right">
+          
+        </div>
+      </div>
+    </div>
+  </div>

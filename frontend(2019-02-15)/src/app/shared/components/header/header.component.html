@@ -1,0 +1,59 @@
+<div class="main-header">
+    <div class="logo" (click)="goHome()">
+      <img src="./assets/images/logo.png" class="logo" alt="">
+    </div>
+
+  <div class="menu-toggle" (click)="toggelSidebar()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <div class="">
+    <div class="search-bar">
+      <!-- <input type="text" placeholder="Search" (focus)="searchService.searchOpen = true"> -->
+      <input type="text" placeholder="Search" (focus)="focus()">
+      <i class="search-icon text-muted i-Magnifi-Glass1"></i>
+    </div>
+  </div>
+  <div style="margin: auto"></div>
+  <div class="header-part-right">
+
+    <!-- <div ngbDropdown [placement]="'bottom-right'" class="">
+      <div class="badge-top-container">
+        <span class="badge badge-primary">{{notifications.length}}</span>
+        <i class="i-Bell text-muted header-icon" id="dropdownBasic1" ngbDropdownToggle></i>
+      </div>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="notification-dropdown" perfectScrollbar>
+        <div class="dropdown-item d-flex" *ngFor="let item of notifications" [routerLink]="[item.link]"> 
+          <div class="notification-icon">
+            <i class="{{item.icon}} text-{{item.status}} mr-1"></i>
+          </div>
+          <div class="notification-details flex-grow-1">
+      123456      <p class="m-0 d-flex align-items-center">
+              <span>{{item.title}}</span>
+              <span *ngIf="item.badge" class="badge badge-pill badge-{{item.status}} ml-1 mr-1">{{item.badge}}</span> 
+              <span class="flex-grow-1"></span>
+              <span class="text-small text-muted ml-auto">{{item.time | relativeTime}}</span>
+            </p>
+            <p class="text-small text-muted m-0">{{item.text | excerpt:30}}</p>
+          </div>
+        </div>        
+      </div>
+    </div> -->
+
+    <div ngbDropdown [placement]="'bottom-right'" class="user col align-self-end">
+      <img src="{{picture}}" id="userDropdown" ngbDropdownToggle alt="">
+
+      <div ngbDropdownMenu aria-labelledby="userDropdown">
+        <div class="dropdown-header">
+          <i class="i-Lock-User mr-1"></i> {{userName}}
+        </div>
+        <button class="dropdown-item" (click)="profileChange()">Account settings</button>
+        <button class="dropdown-item" (click)="signout()">Sign out</button>
+      </div>
+    </div>
+    
+  </div>
+
+</div>

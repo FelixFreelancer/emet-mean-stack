@@ -1,0 +1,171 @@
+<div class="breadcrumb">
+    <h1>Item Edit</h1>
+   
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<div class="row">
+   
+
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="card-title mb-3">Edit(Update) Item</div>
+                    <div class="row">
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="type">Type</label>
+                            <!-- <input type="text" [(ngModel)]="editItemData.type" class="form-control form-control-rounded" id="type" placeholder="Enter Type Eg: Investor "> -->
+                            <select class="form-control form-control-rounded" [(ngModel)]="editItemData.type">
+                                <option *ngFor="let type of typeArr"
+                                        [value]="type.name">{{type.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="interest">Interest</label>
+                            <!-- <input type="text" [(ngModel)]="editItemData.interest" class="form-control form-control-rounded" id="interest" placeholder="Enter your Interest Eg: Investment"> -->
+                            <select class="form-control form-control-rounded" [(ngModel)]="editItemData.interest">
+                                <option *ngFor="let interest of interestArr"
+                                        [value]="interest.name">{{interest.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="activity">Activity</label>
+                            <select class="form-control form-control-rounded" [(ngModel)]="editItemData.activity">
+                                <option *ngFor="let activity of activityArr"
+                                        [value]="activity.name">{{activity.name}}
+                                </option>
+                            </select>
+                        </div>
+                      
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="about">About</label>
+                            <input type="text" [(ngModel)]="editItemData.about"  class="form-control form-control-rounded" id="about"
+                                 placeholder="Enter About">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="country">Country</label>
+                            <select class="form-control form-control-rounded" [(ngModel)]="editItemData.geoCountry">
+                                <option *ngFor="let geoCountry of countryArr"
+                                        [value]="geoCountry.name">{{geoCountry.name}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- <div class="col-md-6 form-group mb-3">
+                            <label for="activity">Country</label><br>
+                                <ss-multiselect-dropdown  [texts]="countryTexts" [settings]="countrySettings" [options]="countryOptions" [(ngModel)]="countryModel" ></ss-multiselect-dropdown><br>
+                                <label class="feedback-error" *ngIf="countryWarn" >You must choose more than one country</label>
+                        </div> -->
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="city">City</label>
+                            <input type="text" [(ngModel)]="editItemData.geoCity" class="form-control form-control-rounded" id="city" placeholder="Enter City">
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="video">Video</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">https://www.youtube.com/embed/</span>
+                                </div>
+                                <input type="text" [(ngModel)]="editItemData.video" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Ex: 5WICgADzDqw">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="fromAmount">From Amount</label>
+                            <input type="number" (keypress)="_keyPress($event)"  [(ngModel)]="editItemData.fromAmount" class="form-control form-control-rounded" id="fromAmount" placeholder="Enter fromAmount">
+                            <label class="feedback-error" *ngIf="editItemData.fromAmount > editItemData.toAmount">From Amount must be less than To Amount</label>
+                            <label class="feedback-error" *ngIf="editItemData.fromAmount < 1000">From Amount must be greater than 1000</label>
+                        </div>
+
+                        <div class="col-md-3 form-group mb-3">
+                            <label for="toAmount">To Amount</label>
+                            <input type="number" (keypress)="_keyPress($event)" [(ngModel)]="editItemData.toAmount" class="form-control form-control-rounded" id="toAmount" placeholder="Enter toAmount">
+                            <label class="feedback-error" *ngIf="editItemData.fromAmount > editItemData.toAmount" >To Amount must be greater than From Amount</label>
+                        </div>
+                      
+                        <div class="col-md-6">
+                            <label for="picture">Picture</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" accept="image/*"  id="photo" aria-describedby="photo" (change) = "onFileSelected($event)">
+                                    <label class="custom-file-label" for="photo">{{editItemData.picture.split(".").length == 2 ? editItemData.picture : editItemData.picture.split(".")[1]+"."+editItemData.picture.split(".")[2]}}</label>
+                                </div>
+
+                            </div>
+                            <label class="feedback-error" *ngIf="fileType">You must choose image files</label>
+
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <label for="details">Details</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Details</span>
+                                </div>
+                                <textarea class="form-control" aria-label="details" [(ngModel)]="editItemData.details" ></textarea>
+                            </div>
+                        </div>
+
+                       
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary btn-lg btn-rounded m-1" (click)="updateItem()">
+                                <i class="i-Data-Save"></i>&nbsp; Save</button>
+                            <button type="button" class="btn btn-danger btn-lg btn-rounded m-1" (click)="removeItem()">
+                                    <i class="i-Securiy-Remove"></i>&nbsp; Delete</button>
+                            <button type="button" class="btn btn-success btn-lg btn-rounded m-1" (click)="gotoList()">
+                                <i class="i-Left"></i>&nbsp; Cancel</button>
+                            <!-- <btn-loading btnClass="btn-primary btn-rounded" [loading]="loading">Submit</btn-loading> -->
+                        </div>
+
+                        <button class="btn btn-outline-primary btn-rounded" [hidden]="true" #smallModal_view [class.show]="false" (click)="openSmall(modalSmall)">Launch Modal</button>
+                        <ng-template #modalSmall let-modal>
+                            <div class="modal-header">
+                              <h4 class="modal-title" id="modal-basic-title">Save</h4>
+                              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Saved Successfully.</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-dark btn-rounded" (click)="modal.close('ok')">Ok</button>
+                            </div>
+                        </ng-template>
+                    </div>
+            </div>
+        </div>
+        <button class="btn btn-outline-primary btn-rounded" #confirmModal_view (click)="confirm(modalConfirm)" style="display:none">Delete</button>
+        <ng-template #modalConfirm let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Item deletion</h4>
+            <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">this</span> Item?</strong></p>
+            <p>All information associated to this Item will be permanently deleted.
+            <span class="text-danger">This operation can not be undone.</span>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="modal.dismiss('cancel')">Cancel</button>
+            <button type="button" ngbAutofocus class="btn btn-danger btn-rounded" (click)="modal.close('Ok')">Ok</button>
+        </div>
+    </ng-template>
+    </div>
+
+   
+
+</div>
